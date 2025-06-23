@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {useState, useEffect, useCallback } from 'react';
 import Navigation from './components/Navigation';
 import ThemeToggle from './components/ThemeToggle';
 import Hero from './components/Hero';

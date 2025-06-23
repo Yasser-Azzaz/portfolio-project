@@ -1,13 +1,14 @@
 import React from 'react';
 import { ChevronDown } from 'lucide-react';
+import { SectionProps, ScrollProps } from '../types';
 
-interface Props {
-  scrollToSection: (id: string) => void;
-  isVisible: boolean;
-}
+interface Props extends SectionProps, ScrollProps {}
 
 const Hero: React.FC<Props> = ({ scrollToSection, isVisible }) => (
-  <section id="hero" className="min-h-screen flex items-center justify-center text-center relative overflow-hidden">
+  <section
+    id="hero"
+    className="min-h-screen flex items-center justify-center text-center relative overflow-hidden"
+  >
     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-purple-600/20 to-pink-600/20"></div>
     <div className="relative z-10 max-w-4xl mx-auto px-6">
       <div
