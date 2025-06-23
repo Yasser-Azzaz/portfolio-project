@@ -21,12 +21,10 @@ const About: React.FC<Props> = ({ isVisible }) => {
 
   useEffect(() => {
     if (!hasStarted || index >= fullText.length) return;
-
     const timeout = setTimeout(() => {
       setDisplayedText((prev) => prev + fullText.charAt(index));
       setIndex((prev) => prev + 1);
     }, 25);
-
     return () => clearTimeout(timeout);
   }, [index, fullText, hasStarted]);
 
@@ -34,17 +32,9 @@ const About: React.FC<Props> = ({ isVisible }) => {
     const parts = text.split(/(Yasser Azzaz|React|TypeScript|Tailwind CSS)/g);
     return parts.map((part, i) => {
       if (part === 'Yasser Azzaz') {
-        return (
-          <span key={i} className="font-bold text-blue-500 dark:text-yellow-300">
-            {part}
-          </span>
-        );
+        return <span key={i} className="font-bold text-blue-500 dark:text-yellow-300">{part}</span>;
       } else if (['React', 'TypeScript', 'Tailwind CSS'].includes(part)) {
-        return (
-          <span key={i} className="text-purple-500 dark:text-pink-400 font-medium">
-            {part}
-          </span>
-        );
+        return <span key={i} className="text-purple-500 dark:text-pink-400 font-medium">{part}</span>;
       }
       return <span key={i}>{part}</span>;
     });
@@ -58,7 +48,7 @@ const About: React.FC<Props> = ({ isVisible }) => {
         className="max-w-3xl mx-auto text-lg leading-7 transition-opacity duration-500"
       >
         <h2 className="text-3xl font-bold mb-6 text-center">About Me</h2>
-        <p>
+        <p className="whitespace-pre-line font-medium tracking-wide">
           {getHighlightedText(displayedText)}
         </p>
       </div>

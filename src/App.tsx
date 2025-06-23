@@ -23,14 +23,11 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Scroll to top on refresh
     window.scrollTo(0, 0);
 
-    // Restore theme preference
     const storedTheme = localStorage.getItem('theme');
     if (storedTheme === 'light') setIsDark(false);
 
-    // Smooth scrolling globally
     document.documentElement.style.scrollBehavior = 'smooth';
     return () => {
       document.documentElement.style.scrollBehavior = 'auto';
