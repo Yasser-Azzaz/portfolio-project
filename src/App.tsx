@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Navigation from './components/Navigation';
 import ThemeToggle from './components/ThemeToggle';
 import Hero from './components/Hero';
@@ -12,7 +12,7 @@ const App: React.FC = () => {
   const [isDark, setIsDark] = useState(true);
   const { isVisible } = useIntersectionObserver();
 
-  const toggleTheme = () => setIsDark(prev => !prev);
+  const toggleTheme = () => setIsDark((prev) => !prev);
 
   const scrollToSection = useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -22,34 +22,36 @@ const App: React.FC = () => {
     }
   }, []);
 
- useEffect(() => {
-  // Scroll to top on refresh
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    // Scroll to top on refresh
+    window.scrollTo(0, 0);
 
-  // Optional: restore theme preference
-  const storedTheme = localStorage.getItem('theme');
-  if (storedTheme === 'light') setIsDark(false);
+    // Restore theme preference
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'light') setIsDark(false);
 
-  document.documentElement.style.scrollBehavior = 'smooth';
-  return () => {
-    document.documentElement.style.scrollBehavior = 'auto';
-  };
-}, []);
+    // Smooth scrolling globally
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
+  }, []);
 
-useEffect(() => {
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-}, [isDark]);
-
+  useEffect(() => {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }, [isDark]);
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${
-      isDark 
-        ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white' 
-        : 'bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-900'
-    }`}>
+    <div
+      className={`min-h-screen transition-all duration-500 ${
+        isDark
+          ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white'
+          : 'bg-gradient-to-br from-blue-50 via-white to-purple-50 text-gray-900'
+      }`}
+    >
       <ThemeToggle isDark={isDark} toggleTheme={toggleTheme} />
       <Navigation scrollToSection={scrollToSection} />
-      
+
       <main>
         <Hero scrollToSection={scrollToSection} isVisible={isVisible('hero-content')} />
         <About isVisible={isVisible('about-content')} />
@@ -57,9 +59,9 @@ useEffect(() => {
         <Skills isVisible={isVisible('skills-content')} />
         <Contact isVisible={isVisible('contact-content')} />
       </main>
-      
+
       <footer className="text-center py-8 border-t border-white/10">
-        <p className="text-gray-400">
+        <p className={isDark ? 'text-gray-400' : 'text-gray-600'}>
           © 2025 Yasser Azzaz. Built with React, TypeScript, and lots of ☕
         </p>
       </footer>
