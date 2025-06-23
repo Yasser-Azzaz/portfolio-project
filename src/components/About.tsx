@@ -1,52 +1,69 @@
-import React from 'react';
-import { Code, Palette, Zap } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 interface Props {
   isVisible: boolean;
 }
 
-const About: React.FC<Props> = ({ isVisible }) => (
-  <section id="about" className="py-20 px-6">
-    <div className="max-w-4xl mx-auto">
+const About: React.FC<Props> = ({ isVisible }) => {
+  const fullText = `I'm Yasser Azzaz, a passionate web developer who loves crafting responsive and visually engaging websites using React, TypeScript, and Tailwind CSS. I enjoy solving problems and turning ideas into beautiful digital products.`;
+
+  const [displayedText, setDisplayedText] = useState('');
+  const [index, setIndex] = useState(0);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    if (isVisible && !hasStarted) {
+      setDisplayedText('');
+      setIndex(0);
+      setHasStarted(true);
+    }
+  }, [isVisible, hasStarted]);
+
+  useEffect(() => {
+    if (!hasStarted || index >= fullText.length) return;
+
+    const timeout = setTimeout(() => {
+      setDisplayedText((prev) => prev + fullText.charAt(index));
+      setIndex((prev) => prev + 1);
+    }, 25);
+
+    return () => clearTimeout(timeout);
+  }, [index, fullText, hasStarted]);
+
+  const getHighlightedText = (text: string) => {
+    const parts = text.split(/(Yasser Azzaz|React|TypeScript|Tailwind CSS)/g);
+    return parts.map((part, i) => {
+      if (part === 'Yasser Azzaz') {
+        return (
+          <span key={i} className="font-bold text-blue-500 dark:text-yellow-300">
+            {part}
+          </span>
+        );
+      } else if (['React', 'TypeScript', 'Tailwind CSS'].includes(part)) {
+        return (
+          <span key={i} className="text-purple-500 dark:text-pink-400 font-medium">
+            {part}
+          </span>
+        );
+      }
+      return <span key={i}>{part}</span>;
+    });
+  };
+
+  return (
+    <section id="about" className="py-20 px-4 sm:px-8 lg:px-20">
       <div
         id="about-content"
         data-animate
-        className={`transform transition-all duration-1000 delay-200 ${
-          isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-        }`}
+        className="max-w-3xl mx-auto text-lg leading-7 transition-opacity duration-500"
       >
-        <h2 className="text-4xl font-bold mb-8 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-          About Me
-        </h2>
-        <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-          <p className="text-lg leading-relaxed mb-6">
-            I'm a passionate IT student in my second year, constantly exploring the fascinating world of technology 
-            and building innovative solutions. My journey in programming started with curiosity and has evolved 
-            into a deep love for creating meaningful digital experiences.
-          </p>
-          <p className="text-lg leading-relaxed mb-6">
-            From crafting efficient algorithms in C to building interactive web applications, I enjoy the challenge 
-            of turning complex problems into elegant solutions. Every project is an opportunity to learn something new 
-            and push the boundaries of what's possible.
-          </p>
-          <div className="flex flex-wrap gap-3 mt-8">
-            <div className="flex items-center space-x-2 px-4 py-2 bg-blue-500/20 rounded-full border border-blue-500/30">
-              <Code className="w-4 h-4" />
-              <span>Clean Code</span>
-            </div>
-            <div className="flex items-center space-x-2 px-4 py-2 bg-purple-500/20 rounded-full border border-purple-500/30">
-              <Palette className="w-4 h-4" />
-              <span>UI/UX Design</span>
-            </div>
-            <div className="flex items-center space-x-2 px-4 py-2 bg-pink-500/20 rounded-full border border-pink-500/30">
-              <Zap className="w-4 h-4" />
-              <span>Performance</span>
-            </div>
-          </div>
-        </div>
+        <h2 className="text-3xl font-bold mb-6 text-center">About Me</h2>
+        <p>
+          {getHighlightedText(displayedText)}
+        </p>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default About;
