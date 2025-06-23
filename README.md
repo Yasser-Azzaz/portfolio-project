@@ -92,7 +92,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ```
 portfolio-project/
 ├── public/
-│   ├── index.html
 │   └── favicon.ico
 ├── src/
 │   ├── components/
@@ -111,6 +110,7 @@ portfolio-project/
 │   │   └── index.ts
 │   ├── App.tsx
 │   └── main.tsx
+├── index.html
 ├── package.json
 ├── tsconfig.json
 ├── vite.config.ts

@@ -1,0 +1,26 @@
+<svg width="192" height="192" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="192" height="192" rx="48" fill="url(#gradient)"/>
+  
+  <!-- Geometric pattern -->
+  <path d="M48 72L96 48L144 72V120L96 144L48 120V72Z" fill="white" fill-opacity="0.15"/>
+  <path d="M96 60L132 78V114L96 132L60 114V78L96 60Z" fill="none" stroke="white" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Center logo -->
+  <circle cx="96" cy="96" r="24" fill="white" fill-opacity="0.95"/>
+  <path d="M84 88L96 82L108 88V104L96 110L84 104V88Z" fill="url(#centerGradient)"/>
+  
+  <!-- Letter Y -->
+  <path d="M90 92L96 98L102 92M96 98V108" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <defs>
+    <linearGradient id="gradient" x1="0" y1="0" x2="192" y2="192" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3B82F6"/>
+      <stop offset="0.5" stop-color="#1D4ED8"/>
+      <stop offset="1" stop-color="#1E40AF"/>
+    </linearGradient>
+    <linearGradient id="centerGradient" x1="84" y1="88" x2="108" y2="110" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#3B82F6"/>
+    </linearGradient>
+  </defs>
+</svg>
