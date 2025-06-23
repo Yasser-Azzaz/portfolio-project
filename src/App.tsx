@@ -22,17 +22,23 @@ const App: React.FC = () => {
     }
   }, []);
 
-  useEffect(() => {
-  // Force scroll to top on page load/refresh
+ useEffect(() => {
+  // Scroll to top on refresh
   window.scrollTo(0, 0);
 
-  // Enable smooth scrolling (optional, only if not using scrollTo behavior directly)
-  document.documentElement.style.scrollBehavior = 'smooth';
+  // Optional: restore theme preference
+  const storedTheme = localStorage.getItem('theme');
+  if (storedTheme === 'light') setIsDark(false);
 
+  document.documentElement.style.scrollBehavior = 'smooth';
   return () => {
     document.documentElement.style.scrollBehavior = 'auto';
   };
 }, []);
+
+useEffect(() => {
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}, [isDark]);
 
 
   return (
