@@ -25,7 +25,7 @@ const Contact: React.FC<Props> = ({ isVisible }) => {
       icon: Linkedin,
       label: "LinkedIn",
       value: "linkedin.com/in/yasser-azzaz",
-      href: "https://www.linkedin.com/in/yasser-azzaz",
+      href: "https://www.linkedin.com/in/yasser-azzaz-1b2428368/",
       color: "hover:text-blue-400"
     }
   ];

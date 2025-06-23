@@ -23,11 +23,17 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
-    return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
-    };
-  }, []);
+  // Force scroll to top on page load/refresh
+  window.scrollTo(0, 0);
+
+  // Enable smooth scrolling (optional, only if not using scrollTo behavior directly)
+  document.documentElement.style.scrollBehavior = 'smooth';
+
+  return () => {
+    document.documentElement.style.scrollBehavior = 'auto';
+  };
+}, []);
+
 
   return (
     <div className={`min-h-screen transition-all duration-500 ${
